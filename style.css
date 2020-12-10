@@ -1,5 +1,7 @@
 *{
     box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
 
@@ -23,25 +25,47 @@ header{
     background: rgb(88, 88, 243);
     color: white;
 }
-nav{
+.container{
+    width: 900px;
+    margin: 0 auto;
+}
+.nav{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: .5rem 3rem;
     border: 1px solid black;
+    width: 900px;
+    margin: 1rem auto;
 }
 .nav-items{
     display: flex;
 }
+.nav-items> a >li{
+
+    margin-left: 1rem;
+}
+
+
 li{
     list-style: none;
-    margin-left: 1rem;
 }
 
 a{
     text-decoration: none;
     color: white !important;
 }
-.mya{
-    color: black!important;
+
+
+.footer{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+}
+footer{
+
+    background: chartreuse;
+}
+.social-media-icons{
+    display: flex;
 }

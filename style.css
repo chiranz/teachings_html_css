@@ -1,9 +1,24 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+h1 {
+  background-color: #ded;
 }
 
-.center {
+body {
+  margin: 4rem;
+  padding: 4rem;
+  background: lightblue;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   text-align: center;
+}
+.main {
+  border: 1px solid red;
+  margin: 2rem;
+  padding: 2rem;
+  background-color: lightcoral;
+}
+
+form {
+  text-align: left;
 }

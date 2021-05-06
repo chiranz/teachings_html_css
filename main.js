@@ -1,23 +1,70 @@
-// Javascript CHEATCODEURL
-// https://gist.github.com/thegitfather/9c9f1a927cd57df14a59c268f118ce86
-const postsDiv = document.getElementById("posts");
+//  Factorial using for loop
+// TODO: How will you modify this function if N is negative
+function factWithLoop(n) {
+  let factorial = 1;
+  for (let i = n; i > 0; i--) {
+    console.log(`value of i is ${i}`);
+    factorial *= i;
+  }
 
-const getPosts = async () => {
-  postsDiv.innerText = "Loading...";
-  const response = await fetch("https://jsonplaceholder.typicode.com/posts");
-  const posts = await response.json();
-  const singlePost = posts[0];
-  const singlePostDiv = document.createElement("div");
-  const postHeading = document.createElement("h1");
-  const postContent = document.createElement("p");
-  const postHeadingText = document.createTextNode(singlePost.title);
-  const postBodyText = document.createTextNode(singlePost.body);
-  postsDiv.innerText = "";
-  postHeading.appendChild(postHeadingText);
-  postContent.appendChild(postBodyText);
-  singlePostDiv.appendChild(postHeading);
-  singlePostDiv.appendChild(postContent);
-  postsDiv.appendChild(singlePostDiv);
-};
+  return factorial;
+}
 
-getPosts();
+//  Factorial using recursion
+// TODO: How will you modify this function if N is negative
+function factorialUsingRecursion(n) {
+  if (n <= 1) {
+    return 1;
+  }
+  return n * factorialUsingRecursion(n - 1);
+}
+
+//  Multiplication using for loop
+// TODO: How will you modify this function to satisfy
+// Case 1: When (a) is -ve
+// Case 2: When (b) is -ve
+// Case 3: When (a) and (b) is -ve
+
+function mulUsingLoop(a, b) {
+  let product = 0;
+  for (let i = 0; i < b; i++) {
+    product += a;
+  }
+  return product;
+}
+
+//  Multiplication using recursion
+// TODO: How will you modify this function to satisfy
+// Case 1: When (a) is -ve
+// Case 2: When (b) is -ve
+// Case 3: When (a) and (b) is -ve
+function mulUsingRecursion(a, b) {
+  if (b <= 1) {
+    return a;
+  }
+  return a + mulUsingRecursion(a, b - 1);
+}
+
+// TODO: Fibonacci using for loop
+
+function fibUsingLoop(n) {
+  let fibArr = [0, 1];
+  for (let i = 2; i <= n; i++) {
+    const fib = fibArr[i - 2] + fibArr[i - 1];
+    fibArr.push(fib);
+    console.log(fibArr);
+  }
+  return fibArr[n];
+}
+
+// TODO: Fibonacci using recursion.
+
+function fibUsingRecursion(n) {
+  if (n === 1) {
+    return 1;
+  }
+  if (n === 0) {
+    return 0;
+  }
+  return fibUsingRecursion(n - 1) + fibUsingRecursion(n - 2);
+}

@@ -1,14 +1,18 @@
 //  Factorial using for loop
 // TODO: How will you modify this function if N is negative
 function factWithLoop(n) {
+  const isNegative = Math.abs(n) != n;
+  if (isNegative) {
+    n = Math.abs(n);
+  }
   let factorial = 1;
   for (let i = n; i > 0; i--) {
-    console.log(`value of i is ${i}`);
     factorial *= i;
   }
 
-  return factorial;
+  return isNegative ? `${factorial}i` : factorial;
 }
+console.log(factWithLoop(-5));
 
 //  Factorial using recursion
 // TODO: How will you modify this function if N is negative
@@ -27,8 +31,17 @@ function factorialUsingRecursion(n) {
 
 function mulUsingLoop(a, b) {
   let product = 0;
-  for (let i = 0; i < b; i++) {
-    product += a;
+  if (Math.abs(a) != a && Math.abs(b) != b) {
+    a = Math.abs(a);
+    b = Math.abs(b);
+  }
+  if (Math.abs(a) != a) {
+    temp = a;
+    a = b;
+    b = temp;
+  }
+  for (let i = 0; i < a; i++) {
+    product += b;
   }
   return product;
 }

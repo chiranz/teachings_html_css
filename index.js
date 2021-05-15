@@ -56,14 +56,14 @@ function insertionSort(nums) {
   }
   console.log(nums);
 }
-
-insertionSort(numsA);
+// insertionSort(numsA);
 
 // Bubble Sort
 function bubbleSort(nums) {
   console.log("Called bubble sort");
   for (let i = 0; i < nums.length; i++) {
-    for (let j = i + 1; j < nums.length; j++) {
+    for (let j = 0; j < nums.length; j++) {
+      console.log("Inside loop");
       if (nums[j] > nums[j + 1]) {
         let temp = nums[j];
         // temp = 2
@@ -78,10 +78,68 @@ function bubbleSort(nums) {
   console.log(nums);
 }
 
-bubbleSort(numsB);
+// bubbleSort(numsB);
 
 // for (let i = 0; i < numsB.length; i++) {
 //   for (let j = i + 1; j < numsB.length; j++) {
 //     console.log(i, j);
 //   }
 // }
+
+// TODO: Merge sort
+// function merge(left, right) {
+//   let arr = [];
+//   while (left.length && right.length) {
+//     if (left[0] < right[0]) {
+//       arr.push(left.shift());
+//     } else {
+//       arr.push(right.shift());
+//     }
+//   }
+//   return [...arr, ...left, ...right];
+// }
+
+// function mergeSort(array) {
+//   const half = array.length / 2;
+
+//   if (array.length < 2) {
+//     return array;
+//   }
+//   let left = array.splice(0, half);
+//   return merge(mergeSort(left), mergeSort(array));
+// }
+function merge(left, right) {
+  let arr = [];
+  let i = 0;
+  let j = 0;
+  while (i < left.length && j < right.length) {
+    if (left[i] > right[j]) {
+      arr.push(right[j]);
+      j++;
+    } else {
+      arr.push(left[i]);
+      i++;
+    }
+  }
+
+  return [
+    ...arr,
+    ...left.slice(i, left.length),
+    ...right.slice(j, right.length),
+  ];
+}
+var funCall = 0;
+
+function mergeSort(array) {
+  const half = array.length / 2;
+  funCall += 1;
+  if (array.length < 2) {
+    return array;
+  }
+  let left = array.splice(0, half);
+  return merge(mergeSort(left), mergeSort(array));
+}
+
+console.log(mergeSort([5, 3, 7, 9, 1, 2, 10, 27, 13]));
+
+console.log(funCall);

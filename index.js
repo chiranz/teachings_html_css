@@ -85,7 +85,6 @@ function bubbleSort(nums) {
 //     console.log(i, j);
 //   }
 // }
-
 // TODO: Merge sort
 // function merge(left, right) {
 //   let arr = [];
@@ -140,6 +139,32 @@ function mergeSort(array) {
   return merge(mergeSort(left), mergeSort(array));
 }
 
-console.log(mergeSort([5, 3, 7, 9, 1, 2, 10, 27, 13]));
+// DATE: May 16th
+function swap(i, j, array) {
+  let temp = array[i];
+  // temp = 2
+  array[i] = array[j];
+  // dupnums = [1, 3, 1]
+  array[j] = temp;
+  // dupnums = [1,3,2]
+  console.log(array);
+}
 
-console.log(funCall);
+function selectionSort(nums, desc = false) {
+  for (let i = 0; i < nums.length; i++) {
+    for (let j = i + 1; j < nums.length; j++) {
+      if (!desc) {
+        if (nums[i] > nums[j]) {
+          swap(i, j, nums);
+        }
+      } else {
+        if (nums[i] < nums[j]) {
+          swap(i, j, nums);
+        }
+      }
+    }
+  }
+  console.log(nums);
+}
+
+selectionSort([1, 2, 3, 4, 5]);

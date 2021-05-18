@@ -150,7 +150,7 @@ function swap(i, j, array) {
   console.log(array);
 }
 
-function selectionSort(nums, desc = false) {
+function selectionSort(nums, desc) {
   for (let i = 0; i < nums.length; i++) {
     for (let j = i + 1; j < nums.length; j++) {
       if (!desc) {
@@ -166,5 +166,30 @@ function selectionSort(nums, desc = false) {
   }
   console.log(nums);
 }
+// TODO: Return every two numbers that gives the sum
+// Answer should be in this form = [[a, b], [c, d], [e,f ]]
+function findSum(arr, sum) {
+  for (let i = 0; i < arr.length; i++) {
+    for (let j = i + 1; j < arr.length; j++) {
+      if (arr[i] + arr[j] == sum) {
+        console.log(arr[i], arr[j]);
+      }
+    }
+  }
+}
 
-selectionSort([1, 2, 3, 4, 5]);
+findSum([5, 7, 9, 8, 6, 4], 10);
+
+function insertionSort(array) {
+  for (let i = 0; i < array.length; i++) {
+    const temp = array[i];
+    let j = i - 1;
+    while (j >= 0 && array[j] > temp) {
+      array[j + 1] = array[j];
+      j--;
+    }
+    array[j + 1] = temp;
+  }
+  console.log(array);
+}
+insertionSort([5, 7, 9, 8, 6, 4]);

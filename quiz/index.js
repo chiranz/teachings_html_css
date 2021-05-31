@@ -23,6 +23,7 @@ function parseQuestions(rawQuestions) {
   }
   return formattedQuestions;
 }
+// <buttton> if (currentQuestionIndex === questions.length-1) ? "Submit" : "Next"
 
 // const clientQuestionFormat = [
 //   {
@@ -31,6 +32,9 @@ function parseQuestions(rawQuestions) {
 //     ans: "ans",
 //   },
 // ];
+// answers[0] === questions[0].ans
+
+// ["ans1", "ans2"]
 
 const getQuestions = async (count) => {
   try {
@@ -56,3 +60,17 @@ getQuestions(3);
 // getRandom(["a", "b", "c", "d"])
 // returns items in random order
 // ["d", "a", "c" , "b"]
+
+const calculateScore = () => {
+  let correctCount = 0;
+  let answers = [];
+  let questions = [];
+  // Assuming ans and question array have same length
+  for (let i = 0; i < answers.length; i++) {
+    if (answers[i] === questions[i].ans) {
+      correctCount++;
+    }
+
+    return correctCount;
+  }
+};

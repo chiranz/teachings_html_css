@@ -1,76 +1,84 @@
-// // Load data from api
-// const questionObjectFromApi = [
-//   {
-//     category: "Science: Computers",
-//     type: "multiple",
-//     difficulty: "medium",
-//     question:
-//       "Which of the following languages is used as a scripting language in the Unity 3D game engine?",
-//     correct_answer: "C#",
-//     incorrect_answers: ["Java", "C++", "Objective-C"],
-//   },
-// ];
+const root = document.getElementById("root");
+console.log(root);
+let playButton = document.createElement("button");
+let nextButton = document.createElement("button");
+let heading = document.createElement("h1");
+let question = document.createElement("h3");
+const inputField = document.createElement("input");
+// Loading Screeen
+const loadingScreen = document.createElement("h1");
+loadingScreen.innerText = "Loading....";
+// STATE VARIABLES
+let questionCount;
+let questions;
+let questionId = 0;
 
-function parseQuestions(rawQuestions) {
-  const formattedQuestions = [];
-  for (let question of rawQuestions) {
-    const formattedQuestion = {
-      question: question.question,
-      options: [question.correct_answer, ...question.incorrect_answers],
-      correct_answer: question.correct_answer,
-    };
-    formattedQuestions.push(formattedQuestion);
-  }
-  return formattedQuestions;
-}
-// <buttton> if (currentQuestionIndex === questions.length-1) ? "Submit" : "Next"
+const paintLandingPage = () => {
+  inputField.type = "number";
+  inputField.min = 3;
+  inputField.max = 10;
+  playButton.innerText = "Play";
 
-// const clientQuestionFormat = [
-//   {
-//     question: "",
-//     options: [],
-//     ans: "ans",
-//   },
-// ];
-// answers[0] === questions[0].ans
-
-// ["ans1", "ans2"]
-
-const getQuestions = async (count) => {
-  try {
-    const response = await fetch(
-      `https://opentdb.com/api.php?amount=${count}&category=18&difficulty=medium&type=multiple`
-    );
-    const data = await response.json();
-    const questions = data.results;
-    const formattedQuestions = parseQuestions(questions);
-    if (questions.length === 0) {
-      console.log("Please check the url");
-    }
-    console.log(formattedQuestions);
-  } catch (error) {
-    console.log(error);
-  }
+  heading.innerText = "Play Quiz";
+  root.appendChild(heading);
+  root.appendChild(inputField);
+  root.appendChild(playButton);
 };
 
-getQuestions(3);
+paintLandingPage();
 
-// TODO: Write a function that will return a random array of elements
-
-// getRandom(["a", "b", "c", "d"])
-// returns items in random order
-// ["d", "a", "c" , "b"]
-
-const calculateScore = () => {
-  let correctCount = 0;
-  let answers = [];
-  let questions = [];
-  // Assuming ans and question array have same length
-  for (let i = 0; i < answers.length; i++) {
-    if (answers[i] === questions[i].ans) {
-      correctCount++;
-    }
-
-    return correctCount;
-  }
+const paintQuestion = (questionId, buttonText) => {
+  root.innerHTML = null;
+  heading.innerText = "Questions";
+  question.innerText = questionId + 1;
+  nextButton.innerText = buttonText;
+  root.appendChild(heading);
+  root.appendChild(question);
+  root.appendChild(nextButton);
 };
+
+playButton.addEventListener("click", async () => {
+  // Check if input value is more than 3
+  questionCount = inputField.value;
+  if (questionCount >= 3) {
+    // Fetch question
+    // Paint screen with first question
+    // Show loading screen
+    root.innerHTML = null;
+    root.appendChild(loadingScreen);
+    questions = await getQuestions(questionCount);
+    root.innerHTML = null;
+    paintQuestion(questionId, "Next");
+  }
+
+  return;
+});
+
+const showResultPage = () => {
+  // TODO: Call get score function and  change score inner text
+  // TODO: Add replay button so that the dom paints landing page screen
+  root.innerHTML = null;
+  heading.innerText = "Result";
+  const score = document.createElement("h1");
+  score.innerText = "3/5";
+  root.appendChild(heading);
+  root.appendChild(score);
+};
+
+// NEXT BUTTON LOGIC
+nextButton.addEventListener("click", () => {
+  //TODO:  Save Answer
+  let nextButtonText = questionId < questions.length - 2 ? "Next" : "Submit";
+  console.log({ questions, questionId });
+  console.log(nextButtonText);
+  console.log(questions.length);
+  if (questionId < questions.length - 1) {
+    // Save Answer here
+
+    questionId++;
+    paintQuestion(questionId, nextButtonText);
+  } else {
+    console.log("Show result page");
+    showResultPage();
+  }
+});

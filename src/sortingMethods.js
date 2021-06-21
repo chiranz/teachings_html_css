@@ -1,3 +1,14 @@
+const path = require("path");
+const fs = require("fs");
+console.log(__dirname);
+const newPath = path.resolve(__dirname, "main.js");
+console.log(newPath);
+console.log(
+  fs.readFile(newPath, (err) => {
+    console.log(err);
+  })
+);
+
 function insertionSort(array) {
   for (let i = 0; i < array.length; i++) {
     const temp = array[i];

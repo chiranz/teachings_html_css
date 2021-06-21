@@ -1,0 +1,25 @@
+{
+  "name": "firstProject",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chiranz/teachings_html_css.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/chiranz/teachings_html_css/issues"
+  },
+  "homepage": "https://github.com/chiranz/teachings_html_css#readme",
+  "dependencies": {
+    "webpack-cli": "^4.7.0",
+    "webpack-dev-server": "^3.11.2",
+    "wepback": "^1.0.0"
+  }
+}

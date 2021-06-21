@@ -12,6 +12,7 @@ loadingScreen.innerText = "Loading....";
 let questionCount;
 let questions;
 let questionId = 0;
+let answerText = null;
 
 const paintLandingPage = () => {
   inputField.type = "number";
@@ -27,13 +28,39 @@ const paintLandingPage = () => {
 
 paintLandingPage();
 
+const getQuestionText = () => {
+  return `Q ${questionId + 1}. ${questions[questionId].question}`;
+};
+
+const getOptionsHtml = () => {
+  let options = getOptions(questions)[questionId];
+  const optionsFragment = new DocumentFragment();
+  options = options.map((option) => {
+    const optionDiv = document.createElement("div");
+    const radioElement = document.createElement("input");
+    radioElement.type = "radio";
+    radioElement.value = option;
+    radioElement.name = option;
+    const optionLabel = document.createElement("label");
+    optionLabel.htmlFor = option;
+    optionLabel.innerText = option;
+    optionDiv.appendChild(radioElement);
+    optionDiv.appendChild(optionLabel);
+    optionsFragment.appendChild(optionDiv);
+  });
+  return optionsFragment;
+};
+
 const paintQuestion = (questionId, buttonText) => {
+  // TODO: Show options
   root.innerHTML = null;
   heading.innerText = "Questions";
-  question.innerText = questionId + 1;
+  question.innerText = getQuestionText();
   nextButton.innerText = buttonText;
   root.appendChild(heading);
   root.appendChild(question);
+  const options = getOptionsHtml();
+  root.appendChild(options);
   root.appendChild(nextButton);
 };
 
@@ -56,13 +83,21 @@ playButton.addEventListener("click", async () => {
 
 const showResultPage = () => {
   // TODO: Call get score function and  change score inner text
+
   // TODO: Add replay button so that the dom paints landing page screen
+  const playAgainButton = document.createElement("button");
+  playAgainButton.innerText = "Play Again";
+  playAgainButton.addEventListener("click", () => {
+    window.location.reload();
+  });
   root.innerHTML = null;
   heading.innerText = "Result";
+
   const score = document.createElement("h1");
   score.innerText = "3/5";
   root.appendChild(heading);
   root.appendChild(score);
+  root.appendChild(playAgainButton);
 };
 
 // NEXT BUTTON LOGIC

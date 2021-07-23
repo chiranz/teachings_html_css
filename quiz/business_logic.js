@@ -3,12 +3,12 @@ function parseQuestions(rawQuestions) {
   for (let question of rawQuestions) {
     const formattedQuestion = {
       question: question.question,
-      options: [question.correct_answer, ...question.incorrect_answers],
+      options: getRandomizedArray ([question.correct_answer, ...question.incorrect_answers]),
       correct_answer: question.correct_answer,
     };
     formattedQuestions.push(formattedQuestion);
   }
-  return formattedQuestions;
+  return formattedQuestions;  
 }
 
 const getQuestions = async (count) => {
@@ -27,7 +27,6 @@ const getQuestions = async (count) => {
     console.log(error);
   }
 };
-getQuestions(3);
 
 const getCorrectAnswers = (questions) => {
   let answers = [];
@@ -36,6 +35,7 @@ const getCorrectAnswers = (questions) => {
   }
   return answers;
 };
+ 
 const getOptions = (questions) => {
   let options = [];
   for (let q of questions) {
@@ -44,41 +44,39 @@ const getOptions = (questions) => {
   return options;
 };
 
-const calculateScore = async (correctAns, userAns) => {
+const calculateScore = (correctAns, userAnswers) => {
   let correctCount = 0;
   // Assuming ans and question array have same length
   for (let i = 0; i < userAnswers.length; i++) {
-    if (userAns[i] === correctAns[i]) {
-      correctCount++;
-    }
-  }
-  return {
-    score: correctCount,
-    questionCount: correctAns.length,
-  };
-};
-
-// FOR SIMULATION ONLY
-const getSimulatedAnswers = (questions) => {
-  let answers = [];
-  for (let q of questions) {
-    const randomOpt = randInt(0, 4);
-
-    answers.push(q.options[randomOpt]);
-  }
-  return answers;
-};
-
-const calculateSimulatedScore = async () => {
-  let questions = await getQuestions(5);
-  let correctCount = 0;
-  let answers = getCorrectAnswers(questions);
-  let userAnswers = getSimulatedAnswers(questions);
-  // Assuming ans and question array have same length
-  for (let i = 0; i < userAnswers.length; i++) {
-    if (userAnswers[i] === answers[i]) {
+    if (userAnswers[i] === correctAns[i]) {
       correctCount++;
     }
   }
   return correctCount;
+ 
 };
+
+// FOR SIMULATION ONLY
+// const getSimulatedAnswers = (questions) => {
+//   let answers = [];
+//   for (let q of questions) {
+//     const randomOpt = randInt(0, 4);
+
+//     answers.push(q.options[randomOpt]);
+//   }
+//   return answers;
+// };
+
+// const calculateSimulatedScore = async () => {
+//   let questions = await getQuestions(5);
+//   let correctCount = 0;
+//   let answers = getCorrectAnswers(questions);
+//   let userAnswers = getSimulatedAnswers(questions);
+//   // Assuming ans and question array have same length
+//   for (let i = 0; i < userAnswers.length; i++) {
+//     if (userAnswers[i] === answers[i]) {
+//       correctCount++;
+//     }
+//   }
+//   return correctCount;
+// };
